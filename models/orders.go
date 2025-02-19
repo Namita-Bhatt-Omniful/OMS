@@ -6,10 +6,12 @@ import (
 
 type Order struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"id"` //_id is default unique identifier in mongodb
+	OrderID       string             `bson:"order_id,omitempty" json:"order_id"`
 	SellerID      string             `bson:"seller_id,omitempty" json:"seller_id"`
-	ItemCount     int                `bson:"item_count" json:"item_count"`
+	SKUID         string             `bson:"sku_id,omitempty" json:"sku_id"`
+	ItemCount     string             `bson:"item_count" json:"item_count"`
 	ModeOfPayment string             `bson:"mode_of_payment" json:"mode_of_payment"`
-	Amount        int                `bson:"amount" json:"amount"`
+	Amount        string             `bson:"amount" json:"amount"`
 	Status        string             `bson:"status" json:"status"`
 	Address       string             `bson:"address" json:"address"`
 	CreatedAt     primitive.DateTime `bson:"created_at" json:"created_at"`

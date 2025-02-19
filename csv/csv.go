@@ -8,12 +8,13 @@ import (
 	"github.com/omniful/go_commons/csv"
 )
 
-func ParseCSVFile(filepath string) [][]string {
+func ParseCSVFile(filepath string) []map[string]string {
+	fmt.Println("parsing....")
 	//configure csvReader
 	csvReader, err := csv.NewCommonCSV(
 		csv.WithBatchSize(100),    //read in batches(100 rows at a time)
 		csv.WithSource(csv.Local), //will take file from local
-		csv.WithLocalFileInfo("data.csv"),
+		csv.WithLocalFileInfo("/Users/namita/Downloads/project.csv"),
 	)
 	if err != nil {
 		fmt.Println("Error while initializing:", err)
@@ -23,7 +24,7 @@ func ParseCSVFile(filepath string) [][]string {
 	if err != nil {
 		fmt.Println("Error while initializing csv reader:", err)
 	}
-	var data [][]string
+	var data []map[string]string
 	for !csvReader.IsEOF() {
 		var records csv.Records //2D slice of strings for csv records
 		records, err = csvReader.ReadNextBatch()
@@ -31,11 +32,12 @@ func ParseCSVFile(filepath string) [][]string {
 			log.Fatal(err)
 		}
 		// Process the records
-		var batch []string
-		var headers csv.Headers = []string{"id", "seller_id", "item_count", "mode_of_payment", "status", "amount"}
+		var batch []map[string]string
+		var headers csv.Headers = []string{"id", "order_id", "seller_id", "sku_id", "item_count", "status"}
 		records.Unmarshal(headers, &batch)
-		fmt.Println(batch)
-		data = append(data, batch)
+		data = append(data, batch...)
 	}
+	fmt.Println("CSV parsed successfully!")
+	fmt.Println(data)
 	return data
 }

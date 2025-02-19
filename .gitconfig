@@ -1,0 +1,6 @@
+Namita-Bhatt-Omniful
+    name = Namita-Bhatt-Omniful
+    email = namita.bhatt@omniful.ai
+
+"git@github.com:omniful/go_commons.git" 
+    insteadOf = https://github.com/omniful/go_commons

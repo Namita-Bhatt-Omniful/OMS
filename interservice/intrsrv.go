@@ -16,13 +16,16 @@ var Client *interservice_client.Client
 func InterServiceClient() {
 	config := interservice_client.Config{
 		ServiceName: "user-service",
-		BaseURL:     "http://ocalhost:8080/api",
+		BaseURL:     "http://localhost:8080",
 		Timeout:     5 * time.Second,
 	}
+
 	client, err := interservice_client.NewClientWithConfig(config)
+
 	if err != nil {
 		panic(err)
 	}
+
 	Client = client
 }
 func GetRequest(ctx context.Context, userData interface{}, url string) (interface{}, *interservice_client.Error) {
@@ -43,11 +46,13 @@ func PostRequest(ctx context.Context, userData interface{}, url string, body int
 		Url:  url,
 		Body: body,
 	}
+
 	_, err := Client.Post(request, &userData)
 	if err != nil {
 		return nil, err
 	}
-	json_data, _ := json.Marshal(userData)
-	fmt.Println(string(json_data))
+	jsonData, _ := json.Marshal(userData)
+	fmt.Println(string(jsonData))
+
 	return &userData, nil
 }

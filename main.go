@@ -1,7 +1,10 @@
 package main
 
 import (
-	"OMS/inits"
+	dbconn "OMS/inits/DB"
+	afka "OMS/inits/Kafka"
+	"OMS/interservice"
+	"OMS/routes"
 	"fmt"
 
 	"github.com/omniful/go_commons/http"
@@ -10,8 +13,11 @@ import (
 func main() {
 	server := http.InitializeServer(":8081", 0, 0, 0)
 	// routes.Test(server)
-	inits.InitializeDB()
-	inits.InitializeSQS()
+	routes.GetRouter(server)
+	dbconn.InitializeDB()
+	interservice.InterServiceClient()
+	// Sqs.InitializeSQS()
+	afka.InitializeKafka()
 	err := server.StartServer("OMS")
 
 	if err != nil {
