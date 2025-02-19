@@ -3,6 +3,7 @@ package main
 import (
 	dbconn "OMS/inits/DB"
 	afka "OMS/inits/Kafka"
+	Sqs "OMS/inits/SQS"
 	"OMS/interservice"
 	"OMS/routes"
 	"fmt"
@@ -16,7 +17,7 @@ func main() {
 	routes.GetRouter(server)
 	dbconn.InitializeDB()
 	interservice.InterServiceClient()
-	// Sqs.InitializeSQS()
+	Sqs.InitializeSQS()
 	afka.InitializeKafka()
 	err := server.StartServer("OMS")
 

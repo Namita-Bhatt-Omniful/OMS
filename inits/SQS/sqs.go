@@ -39,7 +39,6 @@ func InitializeSQS() {
 		return
 	}
 	Queue = q
-
 	// create consumer
 	Handler := &MyHandler{}
 	//handler is of sqs.ISqsMessageHandler type which is an interface with Process method inside it
@@ -49,10 +48,8 @@ func InitializeSQS() {
 		fmt.Println("Error in creating consumer", err)
 		return
 	}
-
 	SQSConsumer = consumer
 	consumer.Start(context.Background())
-
 	publisher := sqs.NewPublisher(q)
 	SQSPublisher = publisher
 	fmt.Println("SQS Initialization successful!")

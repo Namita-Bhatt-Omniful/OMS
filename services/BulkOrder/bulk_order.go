@@ -89,7 +89,7 @@ func CreateBulkOrder(filePath string) {
 		if err != nil {
 			panic(err1)
 		}
-		fmt.Println(string(mssg.Value))
+		// fmt.Println(string(mssg.Value))
 	}
 	fmt.Println("Successfully published valid orders to kafka")
 }
